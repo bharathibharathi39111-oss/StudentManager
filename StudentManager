@@ -1,0 +1,122 @@
+import java.util.*;
+class Student{
+int id;
+String name;
+int age;
+String course;
+Student(int id,String name,int age,String course){
+this.id=id;
+this.name=name;
+this.age=age;
+this.course=course;
+}
+void display(){
+System.out.println("ID: "+id);
+System.out.println("Name: "+name);
+System.out.println("Age: "+age);
+System.out.println("Course: "+course);
+System.out.println();
+}
+}
+public class StudentManager{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+ArrayList<Student>list=new ArrayList<>();
+while(true){
+System.out.println("\n===== Student Manager =====");
+System.out.println("1.Add Student");
+System.out.println("2.View Students");
+System.out.println("3.Search Student");
+System.out.println("4.Update Student");
+System.out.println("5.Delete Student");
+System.out.println("6.Exit");
+System.out.print("Enter Choice: ");
+int choice=sc.nextInt();
+switch(choice){
+case 1:
+System.out.print("Enter ID: ");
+int id=sc.nextInt();
+sc.nextLine();
+System.out.print("Enter Name: ");
+String name=sc.nextLine();
+System.out.print("Enter Age: ");
+int age=sc.nextInt();
+sc.nextLine();
+System.out.print("Enter Course: ");
+String course=sc.nextLine();
+list.add(new Student(id,name,age,course));
+System.out.println("Student Added Successfully");
+break;
+case 2:
+if(list.isEmpty()){
+System.out.println("No Student Records");
+}else{
+for(Student s:list){
+s.display();
+}
+}
+break;
+case 3:
+System.out.print("Enter Student ID: ");
+int sid=sc.nextInt();
+boolean found=false;
+for(Student s:list){
+if(s.id==sid){
+s.display();
+found=true;
+break;
+}
+}
+if(!found){
+System.out.println("Student Not Found");
+}
+break;
+case 4:
+System.out.print("Enter Student ID: ");
+int uid=sc.nextInt();
+sc.nextLine();
+boolean updated=false;
+for(Student s:list){
+if(s.id==uid){
+System.out.print("Enter New Name: ");
+s.name=sc.nextLine();
+System.out.print("Enter New Age: ");
+s.age=sc.nextInt();
+sc.nextLine();
+System.out.print("Enter New Course: ");
+s.course=sc.nextLine();
+updated=true;
+System.out.println("Student Updated Successfully");
+break;
+}
+}
+if(!updated){
+System.out.println("Student Not Found");
+}
+break;
+case 5:
+System.out.print("Enter Student ID: ");
+int did=sc.nextInt();
+boolean deleted=false;
+for(int i=0;i<list.size();i++){
+if(list.get(i).id==did){
+list.remove(i);
+deleted=true;
+System.out.println("Student Deleted Successfully");
+break;
+}
+}
+if(!deleted){
+System.out.println("Student Not Found");
+}
+break;
+case 6:
+System.out.println("Thank You");
+sc.close();
+return;
+default:
+System.out.println("Invalid Choice");
+}
+}
+}
+}
